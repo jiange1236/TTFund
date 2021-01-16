@@ -6,9 +6,9 @@ import re
 from openpyxl import Workbook
 
 # 设置股票代码、时间
-tcode = '377240'
-sdate = '2016-03-01'
-edate = '2017-03-01'
+tcode = '163402'
+sdate = '2016-01-15'
+edate = '2021-01-15'
 
 # 初始化excel函数
 wb = Workbook()
@@ -34,12 +34,15 @@ for fdti in fdtitles:
     tirow += 1
 
 # 获取基金数据
-fddatas = htmlt.xpath('/html/body/text()')
-pages = re.search(r'(?<=pages:)[1-9]+', fddatas[0])[0]
+fdpage = htmlt.xpath('/html/body/text()')
+pages = re.search(r'(?<=pages:)[1-9]+', fdpage[0])[0]
 spantext = []
 for page in range(1, int(pages)):
-    spans = htmlt.xpath(
-        '/html/body/table/tbody/tr/td')
+    fdurls = 'http://fund.eastmoney.com/f10/F10DataApi.aspx?type=lsjz&code=' + \
+        tcode+'&page='+str(page)+'&per=20&sdate='+sdate+'&edate='+edate
+    fddatas = requests.get(url=fdurls)
+    htmlts = etree.HTML(fddatas.text)
+    spans = htmlts.xpath('/html/body/table/tbody/tr/td')
     for span in spans:
         spantext.append(span.text)
 
