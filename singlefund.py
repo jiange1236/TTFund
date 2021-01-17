@@ -5,7 +5,8 @@ import xlwt
 import time
 
 # 设置基金代码、时间
-tcode = ['163402', '110011', '166002', '163406', '519736', '000619']
+tcode = ['163402', '110011', '166002', '163406', '000619']
+# 000619
 sdate = '2010-01-04'
 edate = '2021-01-15'
 
@@ -40,7 +41,7 @@ class fund(object):
     def fdda(self):
         spantext = []
         page = self.fdpage()
-        for page in range(1, int(page)):
+        for page in range(1, int(page)+1):
             fdurls = 'http://fund.eastmoney.com/f10/F10DataApi.aspx?type=lsjz&code=' + \
                 self.tc+'&page='+str(page)+'&per=20&sdate=' + \
                 sdate+'&edate='+edate
