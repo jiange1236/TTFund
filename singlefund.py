@@ -2,10 +2,11 @@ import requests    # XPath解析
 from lxml import etree
 import re
 import xlwt
+import time
 
 # 设置基金代码、时间
 tcode = ['163402', '110011', '166002', '163406', '519736', '000619']
-sdate = '2020-12-15'
+sdate = '2010-01-04'
 edate = '2021-01-15'
 
 
@@ -51,6 +52,9 @@ class fund(object):
         return spantext
 
 
+print('----------START-----------')
+print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+print('-')
 # 获得基金数据
 fdnum = len(tcode)
 fd_name = [fund(tcode[i]).fdname() for i in range(fdnum)]
@@ -77,4 +81,7 @@ for i in range(fdnum):
         srow += 1
 
 wb.save('基金净值数据.xlsx')
+print('-')
+print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+print('-----------END------------')
 print('生成完毕')
