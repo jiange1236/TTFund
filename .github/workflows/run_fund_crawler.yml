@@ -23,7 +23,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
         with:
-        repository: 'Jerry1014/FundCrawler'
+          repository: 'Jerry1014/FundCrawler'
         
       - name: Set variables
         run: |
